@@ -21,6 +21,7 @@ type Entry struct {
 	Title string `xml:"title"`
 	Link Link `xml:"link"`
 	Updated string `xml:"updated"`
+	Published string `xml:"published,omitempty"`
 	Summary struct {
 		Type string `xml:"type,attr,omitempty"`
 		Text string `xml:",chardata"`
@@ -90,6 +91,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		curEntry.Entry.Summary.Text = markdown
 		curEntry.Link.Href = cmt.HTMLURL
 		curEntry.Updated = curThread.UpdatedAt
+		curEntry.Published = cmt.CreatedAt
 	}
 
 	// Mark notifications read, errors here may be ignored
